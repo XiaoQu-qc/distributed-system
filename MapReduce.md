@@ -11,3 +11,6 @@ map函数返回中间键值对，而reduce的作用就是将这些中间键值�
 - Consider map task M and reduce tasks R1 and R2.  Let e(Ri) be the execution of Ri that committed (there  is exactly one such execution). The weaker semantics  arise because e(R1) may have read the output produced  by one execution of M and e(R2) may have read the  output produced by a different execution of M .没太弄明白在说什么
 - 输入数据存储在组成集群的计算机的本地磁盘上，以节约网络带宽，MapReduce 主程序会考虑输入文件的位置信息，并尝试在包含相应输入数据副本的机器上调度map任务
 - 当 MapReduce 操作接近完成时，主控程序会安排剩余正在进行的任务的备份执行。只要主任务或备份任务执行完成，任务就会被标记为已完成。
+## 4.改进
+- 我们允许用户指定一个可选的 Combiner 函数，在数据通过网络发送之前对其进行部分合并。先合并部分中间键值对
+- *combiner函数的处理结果会作为中间键值对，中间文件继续交给reduce工作处理，reduce函数写入最终输出文件*

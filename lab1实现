@@ -1,0 +1,5 @@
+###coordinator,worker,rpc rpc 定义过程调用中要用到的结构体，taskRequest,taskResponse,coordinator给worker分配任务，控制系统的分布式并行，worker在接收到任务后调用mapf或者reducef完成map或者reduce操作
+###并且写入相应的文件中
+- coordinator 对任务资源的总数，名称进行管理每一篇文章就是一个map任务，worker请求coordinator系统调用以后，worker根据接受的参数情况判断是map还是reduce任务
+- 如果是map任务，worker对文章的每个单词生成一个kv（v应该是“1”），该kv存储的位置为文件名 mr-taskid-ihash(k)%nreduce，做到这一步之后是不是要把文件名后缀相同的再合并一下，这样
+- 就可以使得reduc的数量对应的上了
